@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Products | Demo payment ",
   description: "Browse our collection of products",
 };
-
+export const dynamic = "force-dynamic";
 export default function ProductsPage({
   searchParams,
 }: {
