@@ -9,32 +9,26 @@ export const metadata: Metadata = {
   title: "Products | Demo payment ",
   description: "Browse our collection of products",
 };
-export const dynamic = "force-dynamic";
-export default function ProductsPage({
-  searchParams,
-}: {
-  searchParams?: { category?: string };
-}) {
-  const category = searchParams?.category || "all";
-  
+
+export default function ProductsPage() {
+  const category = "all"; // 👈 Replace with static category or switch to dynamic route
+
   return (
-    <div className="flex justify-center ">
-    <div className="container py-10  ">
-      <div className="space-y-4">
-        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Products</h1>
-        <p className="text-muted-foreground">
-          Browse our collection of high-quality products
-        </p>
+    <div className="flex justify-center">
+      <div className="container py-10">
+        <div className="space-y-4">
+          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Products</h1>
+          <p className="text-muted-foreground">Browse our collection of high-quality products</p>
+        </div>
+
+        <div className="mt-8">
+          <CategoryFilter categories={categories} activeCategory={category} />
+        </div>
+
+        <Suspense fallback={<ProductSkeletonGrid />}>
+          <ProductList category={category} />
+        </Suspense>
       </div>
-      
-      <div className="mt-8">
-        <CategoryFilter categories={categories} activeCategory={category} />
-      </div>
-      
-      <Suspense fallback={<ProductSkeletonGrid />}>
-        <ProductList category={category} />
-      </Suspense>
-    </div>
     </div>
   );
 }
